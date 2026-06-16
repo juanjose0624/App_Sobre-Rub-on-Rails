@@ -1,0 +1,6 @@
+import "@hotwired/turbo-rails"
+import "home"
+import "sweetalert2"
+import "dashboard"
+import "tabla"
+import "info"

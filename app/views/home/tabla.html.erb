@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="barra-superior">
+  <%= link_to "← Volver al dashboard", dashboard_path, class: "btn-dashboard" %>
+</div>
+  <h1>Tabla: <%= @tabla %></h1>
+
+  <button 
+    id="btn-nuevo" 
+    class="btn btn-success"
+    data-tabla="<%= @tabla %>">
+    + Nuevo registro
+  </button>
+<div class="buscador">
+  <form method="get">
+    <input type="text" name="q" placeholder="Buscar..." value="<%= params[:q] %>">
+    <button type="submit">Buscar</button>
+    <a href="?tabla=<%= @tabla %>" class="btn-limpiar">Limpiar</a>
+  </form>
+</div>
+  <!-- FORMULARIO DINÁMICO -->
+  <div id="form-container" class="form-container" style="display:none;">
+    <h2>Nuevo registro</h2>
+
+    <form id="form-crear">
+      <div class="form-grid">
+        <% @registros.columns.each do |col| %>
+          <% next if col == @pk %>
+
+          <div class="campo">
+            <label><%= col.humanize %></label>
+            <input    
+              type="text"
+              name="<%= col %>"
+              class="input-campo"
+            >
+          </div>
+        <% end %>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="button" id="btn-cancelar" class="btn btn-secondary">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- TABLA -->
+ <div class="estadisticas">
+  <div class="stat-card">
+    <div>Total de registros</div>
+    <strong><%= @total_registros %></strong>
+  </div>
+  <div class="stat-card">
+    <div>Último ID</div>
+    <strong><%= @ultimo_id %></strong>
+  </div>
+  <div class="stat-card">
+    <div>Columnas</div>
+    <strong><%= @num_columnas %></strong>
+  </div>
+  <% if @columna_unica %>
+  <div class="stat-card">
+    <div>Únicos en <%= @columna_unica %></div>
+    <strong><%= @valores_unicos %></strong>
+  </div>
+  <% end %>
+</div>
+  <div class="tabla-wrapper">
+    <table class="tabla-datos">
+      <thead>
+        <tr>
+          <% @registros.columns.each do |col| %>
+            <th data-col="<%= col %>"><%= col.humanize %></th>
+          <% end %>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @registros.each do |fila| %>
+          <tr>
+            <% @registros.columns.each do |col| %>
+              <td><%= fila[col] %></td>
+            <% end %>
+
+            <td>
+              <button 
+                class="btn-editar"
+                data-id="<%= fila[@pk] %>"
+                data-tabla="<%= @tabla %>">
+                Editar
+              </button>
+
+              <button 
+                class="btn-eliminar"
+                data-id="<%= fila[@pk] %>"
+                data-tabla="<%= @tabla %>">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  document.addEventListener("turbo:load", () => {
+    const tablaActual = "<%= @tabla %>";
+  });
+</script>

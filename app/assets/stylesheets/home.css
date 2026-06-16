@@ -1,0 +1,62 @@
+/* Fondo general */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e1b4b);
+  color: #e5e7eb;
+}
+
+/* Sección principal */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Contenedor del contenido */
+.hero-content {
+  max-width: 800px;
+  text-align: center;
+  padding: 40px;
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+/* Título */
+.hero-title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #a5b4fc;
+  text-shadow: 0 0 10px rgba(99, 102, 241, 0.8);
+}
+
+/* Texto descriptivo */
+.hero-text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #e2e8f0;
+}
+
+/* Botón principal */
+.hero-button {
+  margin-top: 20px;
+  padding: 12px 28px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #6366f1, #9333ea);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(147, 51, 234, 0.6);
+}
+
+/* Efecto al pasar el mouse */
+.hero-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.9);
+}
